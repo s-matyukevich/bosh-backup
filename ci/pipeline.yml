@@ -27,7 +27,7 @@ jobs:
         params:
           BOSH_URL: {{bosh-url}}
           BOSH_USER: {{bosh-user}}
-          BOSH_PASSWORD: {{bosh-password}}
+          BOSH_PASSWORD: {{bosh-pass}}
           STORE_HOST: {{store-host}}
           STORE_USER: {{store-user}}
           STORE_PASSWORD: {{store-password}}
