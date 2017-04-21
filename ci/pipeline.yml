@@ -1,0 +1,36 @@
+resources:
+- name: daily
+  type: time
+  source: {interval: 24h}
+- name: bosh-backup
+  type: git
+  source:
+    uri: {{bosh-backup-git-url}}
+    private_key: {{git-private-key}}
+
+jobs:
+- name: backup
+  plan: 
+    - aggregate:
+      - get: bosh-backup
+      - get: daily
+        trigger: true
+    - task: backup
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: virtmerlin/deploy-worker
+        run:
+          path: bosh-backup/ci/tasks/backup.sh
+        params:
+          BOSH_URL: {{bosh-url}}
+          BOSH_USER: {{bosh-user}}
+          BOSH_PASSWORD: {{bosh-password}}
+          STORE_HOST: {{store-host}}
+          STORE_USER: {{store-user}}
+          STORE_PASSWORD: {{store-password}}
+          STORE_PATH: {{store-path}}
+        inputs:
+        - name: bosh-backup
