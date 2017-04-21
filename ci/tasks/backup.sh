@@ -2,8 +2,10 @@
 
 echo "$BOSH_CACERT" > rootCA.pem
 
-bosh -u $BOSH_USER -p $BOSH_PASSWORD --ca-cert rootCA.pem target $BOSH_URL
+bosh --ca-cert rootCA.pem -t $BOSH_URL  target
 
-bosh -u $BOSH_USER -p $BOSH_PASSWORD --ca-cert backup "bosh-$(date +%Y-%m-%dT%H:%M:%S%z).tgz"
+echo -e "$BOSH_USER\n$BOSH_PASSWORD\n" | bosh login
+
+bosh backup "bosh-$(date +%Y-%m-%dT%H:%M:%S%z).tgz"
 
 echo $STORE_PASSWORD | scp bosh*.tgz $STORE_USER@$STORE_HOST:$STORE_PATH
