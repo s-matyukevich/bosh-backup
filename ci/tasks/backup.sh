@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo "BOSH_CACERT" > rootCA.pem
+echo "$BOSH_CACERT" > rootCA.pem
 
 bosh -u $BOSH_USER -p $BOSH_PASSWORD --ca-cert rootCA.pem target $BOSH_URL
 
