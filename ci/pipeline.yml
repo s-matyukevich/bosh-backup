@@ -28,6 +28,7 @@ jobs:
           BOSH_URL: {{bosh-url}}
           BOSH_USER: {{bosh-user}}
           BOSH_PASSWORD: {{bosh-pass}}
+          BOSH_CACERT: {{bosh-cacert}}
           STORE_HOST: {{store-host}}
           STORE_USER: {{store-user}}
           STORE_PASSWORD: {{store-password}}

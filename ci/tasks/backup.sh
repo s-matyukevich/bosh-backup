@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/bash -e
 
-bosh -u $BOSH_USER -p $BOSH_PASSWORD target $BOSH_URL
+echo "BOSH_CACERT" > rootCA.pem
+
+bosh -u $BOSH_USER -p $BOSH_PASSWORD --ca-cert rootCA.pem target $BOSH_URL
 
 bosh backup "bosh-$(date +%Y-%m-%dT%H:%M:%S%z).tgz"
 
