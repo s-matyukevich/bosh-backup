@@ -2,9 +2,7 @@
 
 echo "$BOSH_CACERT" > rootCA.pem
 
-bosh --ca-cert rootCA.pem -t $BOSH_URL  target
-
-echo -e "$BOSH_USER\n$BOSH_PASSWORD\n" | bosh login
+echo -e "$BOSH_USER\n$BOSH_PASSWORD\n"| bosh --ca-cert rootCA.pem target  $BOSH_URL
 
 bosh backup "bosh-$(date +%Y-%m-%dT%H:%M:%S%z).tgz"
 
